@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+    </body>
+
+    <script type='text/babel'> 
+        class App extends React.Component
+        {
+            render(){
+                return(
+                    <div>
+                            <Header title="This is 1st App.." /> 
+                            <Clock />
+                            <div className="container-fluid">
+                                <div className="jumborton">
+                                    <Child items={activity}/> 
+                                </div>
+                            </div>
+                    </div>
+                )
+            }
+        };
+
+        class Header extends React.Component
+        {
+            render(){
+                return(
+                    <div className="container-fluid">
+                        <div className="jumborton">
+                        <h2>{this.props.title}</h2><br/>
+                        </div>
+                    </div>
+
+                )
+            }
+           
+        };
+
+        class Child extends React.Component
+        {
+            render(){
+                var newItems = this.props.items;
+
+                return(
+                    <div>
+                        <div className="a">
+                            {
+                                newItems.map(
+                                    x => 
+                                    {
+                                        return(
+                                            <AllItem activityItems={x} key={x.id}/>
+                                        )
+                                    }
+                                )
+                            }
+                        
+                        </div>   
+                    </div>
+                )
+            }
+                        
+        };
+
+        class AllItem extends React.Component
+        {
+            render(){
+                var finalItems = this.props.activityItems;
+                
+                return(
+                    <div>
+                                <table className="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                        <h2>{finalItems.text}</h2><br/>
+                                        <h2>{finalItems.obj[0].name} | {finalItems.user.id}</h2>
+                                        <span className="badge badge-danger">{finalItems.timestamp}</span>
+                                        </th>
+                                        <th>
+                                        <button type="button" className="btn btn-warning">{finalItems.timestamp}</button>
+                                        </th> 
+                                    </tr>
+                                </thead>
+                                </table>                     
+                    </div>
+                )
+            }
+                        
+        };
+
+        class Clock extends React.Component
+        {
+                constructor()
+                {
+                    super();
+                    this.state = {
+                          currentTime : new Date()
+                    }
+                    
+                          
+                          //const {hours,minutes,seconds,ampm} = this.state;
+
+                }
+                currentTimeFunc(){
+                    this.setState(
+                        {
+                            currentTime : new Date()
+                        }
+                    )
+                }
+
+                componentWillMount()
+                {
+                   setInterval(() => this.currentTimeFunc(), 1000);
+                }
+                render()
+                {
+                    
+                    return(
+                            <div className="Clock">
+                                {
+                                    this.state.currentTime.toLocaleTimeString()
+                                }
+                            </div>
+                    )
+                }
+        };
+
+
+        var activity = 
+        [{
+            timestamp: new Date().getTime(),
+            id : 1,
+            text : "Components 1",
+            obj : [{ name : "indrajit Maurya"}],
+            user : {id : 12344 }
+        },
+        {
+            timestamp: new Date().getTime(),
+            text : "Components 2",
+            id : 2,
+            obj : [{ name : "Harsha Moorthy"}],
+            user : {id : 12424 }
+        },
+        {
+            timestamp: new Date().getTime(),
+            text : "Components 3",
+            id : 3,
+            obj : [{ name : "Soehan Bhugalya"}],
+            user : {id : 17424 }
+        }]
+
+        const renderAt = document.querySelector('#root');
+        ReactDOM.render(<App/>, renderAt);
+    </script>
+</html>
