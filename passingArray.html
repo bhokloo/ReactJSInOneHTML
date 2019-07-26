@@ -1,0 +1,73 @@
+<html>
+    <head>
+            <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+            <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+            <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      
+    </head>
+    <body>
+        <div id ="findme">
+            Hello
+        </div>
+
+ 
+        <script type="text/babel">
+            class Abc extends React.Component
+            {
+                render()
+                {
+                    return(
+                        <div>
+                                <Bcd va={arrayValues}>indrajit</Bcd>
+                        </div>       
+                    )
+                }
+            }
+
+            class Bcd extends React.Component
+            {
+                render()
+                {
+                    return(
+                        <div>
+                            {
+                                this.props.va.map(x =>
+                                {
+                                    return(
+                                        <div>
+                                            <h1 key={x.id}>{x.a}</h1>
+                                            <h1 key={x.id}>{x.add[0].permanent}</h1>
+                                        </div>
+                                    )
+                                })               
+                            }
+                        </div>
+                    )
+                }
+            }
+
+            var arrayValues = [
+                { 
+                    a:'indrjait',
+                    age:28,
+                    add:
+                    [{
+                        permanent:'shillong',
+                        temporary:'singapore'
+                    }
+                    ],
+                    id:1,
+                    ida:{NUSid:123}
+                }
+            ];
+
+            var where = document.querySelector("#findme");
+            ReactDOM.render(<Abc/>, where);
+            
+        </script>
+    </body>
+</html>
