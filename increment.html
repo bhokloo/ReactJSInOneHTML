@@ -1,0 +1,80 @@
+<html>
+    <head>
+            <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+            <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+            <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      
+    </head>
+    <body>
+        <div id ="findme">
+            Hello
+        </div>
+
+ 
+        <script type="text/babel">
+            class Abc extends React.Component
+            {
+                render()
+                {
+                    return(
+                        <div>
+                                <Bcd value="maurya">indrajit</Bcd>
+                        </div>       
+                    )
+                }
+            }
+
+            class Bcd extends React.Component
+            {
+                constructor(props)
+                {
+                    super(props);
+                    this.state = {
+                        a : 1,
+                        b : props.value
+                    }  
+                }
+                callMe()
+                {
+                    this.setState((prevState) =>
+                        {
+                            return(
+                               { a : prevState.a + 1}
+                            )  
+                        }
+                    );
+                }
+
+                componentDidMount()
+                {
+                    setInterval(() => this.callMe(),1000);
+                }
+
+                componentDidUpdate()
+                {
+
+                }
+                render()
+                {   
+                    var valuee = this.props.value;
+                    return(
+                        <div>
+                                <h1>Hello</h1>
+                                <h1>{this.props.children}&nbsp;
+                                {valuee} &nbsp;
+                                {this.state.a}
+                                </h1>
+                        </div>       
+                    )
+                }
+            }
+            var where = document.querySelector("#findme");
+            ReactDOM.render(<Abc/>, where);
+            
+        </script>
+    </body>
+</html>
