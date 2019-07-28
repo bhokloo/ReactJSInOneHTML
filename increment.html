@@ -53,7 +53,25 @@
                 {
                     setInterval(() => this.callMe(),1000);
                 }
-
+                
+                //or we can use
+                <!--componentDidMount()
+                {
+                    alert("3rd ..component did mount to the actual DOM")
+                    setInterval(() => 
+                        {
+                                this.setState((prevState) =>
+                                {
+                                    return(
+                                        {
+                                            time: prevState.time + 2
+                                        }
+                                    )
+                                });
+                        },1000);
+                }-->
+                
+                
                 componentDidUpdate()
                 {
 
