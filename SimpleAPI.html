@@ -1,0 +1,67 @@
+<html>
+    <head>
+            <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+            <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+            <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      
+    </head>
+    <body>
+        <div id ="findme">
+            Hello
+        </div>
+
+ 
+        <script type="text/babel">
+            class Abc extends React.Component
+            {
+                constructor() {
+                super();
+
+                this.state = {
+                term: '',
+                img: ''
+                };
+            }
+
+            onChangeTerm = (event) => {
+                this.setState({
+                term : event.target.value
+                })
+            }
+
+            handleSubmit = (event) => {
+                event.preventDefault();
+                const api_key = 'dc6zaTOxFJmzC';
+                const url = `http://api.giphy.com/v1/gifs/search?q=${this.state.term}&api_key=${api_key}`;
+                fetch(url)
+                .then(response => response.json())
+                .then(data => this.setState({ term:'', img: data.data[0].images.fixed_height.url }))
+                .catch(e => console.log('error', e));
+            }
+
+            render()
+            {
+                return(
+                <div>
+                <center>
+                <form onSubmit={this.handleSubmit}>
+                    <input type="text" value={this.state.term} onChange={this.onChangeTerm} />
+                    <button>Search!</button>
+                </form>
+                <img src={this.state.img} height="200"/>
+                </center>
+                </div>
+                )
+            }
+            }
+
+            var where = document.querySelector("#findme");
+            ReactDOM.render(<Abc/>, where);
+            
+        </script>
+    </body>
+</html>
